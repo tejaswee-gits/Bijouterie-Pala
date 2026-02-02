@@ -15,8 +15,9 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [images, setImages] = useState<HTMLImageElement[]>([]);
     const [imagesLoaded, setImagesLoaded] = useState(0);
-    const totalFrames = 240; // Using all 240 frames found for ultra-smoothness
+    const totalFrames = 240;
     const [isLoading, setIsLoading] = useState(true);
+    const [step, setStep] = useState(1);
 
     // Scroll logic
     const { scrollYProgress } = useScroll({
@@ -36,18 +37,25 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
 
     // Preload images
     useEffect(() => {
+        // Simple mobile detection based on width
+        const isMobile = window.innerWidth < 768;
+        const currentStep = isMobile ? 2 : 1; // Skip every other frame on mobile
+        setStep(currentStep);
+
         const loadedImages: HTMLImageElement[] = [];
         let imagesCount = 0;
+        const totalFramesToLoad = Math.ceil(totalFrames / currentStep);
 
-        for (let i = 1; i <= totalFrames; i++) {
+        for (let i = 1; i <= totalFrames; i += currentStep) {
             const img = new Image();
+            img.decoding = 'async'; // Non-blocking decoding
             // Filename format: ezgif-frame-001.jpg
             const frameNumber = i.toString().padStart(3, "0");
             img.src = `/sequence/ezgif-frame-${frameNumber}.jpg`;
             img.onload = () => {
                 imagesCount++;
                 setImagesLoaded(imagesCount);
-                if (imagesCount === totalFrames) {
+                if (imagesCount >= totalFramesToLoad) {
                     setIsLoading(false);
                 }
             };
@@ -64,8 +72,15 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
         if (!context) return;
 
         const render = () => {
-            const currentIndex = Math.floor(frameIndex.get());
-            const img = images[currentIndex];
+            const rawIndex = Math.floor(frameIndex.get());
+            // Calculate index in the reduced array
+            // e.g. if step is 2, frame 0->idx0, frame 1->idx0, frame 2->idx1...
+            const arrayIndex = Math.min(
+                Math.floor(rawIndex / step),
+                images.length - 1
+            );
+
+            const img = images[arrayIndex];
 
             if (img && img.complete) {
                 // Clear canvas
