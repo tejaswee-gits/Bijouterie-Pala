@@ -123,7 +123,7 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
             unsubscribe();
             window.removeEventListener("resize", handleResize);
         };
-    }, [images, frameIndex]);
+    }, [images, frameIndex, step]);
 
     // Narrative Text Overlays
     const introOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);

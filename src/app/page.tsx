@@ -309,9 +309,9 @@ function MainContent() {
               ★★★★★
             </div>
             <blockquote className="text-gray-300 font-serif text-xl md:text-2xl leading-relaxed italic mb-8 relative">
-              <span className="absolute -top-4 -left-4 text-6xl text-white/10 font-serif">"</span>
+              <span className="absolute -top-4 -left-4 text-6xl text-white/10 font-serif">&quot;</span>
               {t.reviews.review1}
-              <span className="absolute -bottom-8 -right-4 text-6xl text-white/10 font-serif">"</span>
+              <span className="absolute -bottom-8 -right-4 text-6xl text-white/10 font-serif">&quot;</span>
             </blockquote>
             <p className="text-gray-500 uppercase tracking-widest text-xs mb-8">— {t.reviews.author1}</p>
             <button className="px-8 py-3 border border-white/20 text-white font-sans tracking-[0.2em] uppercase text-xs hover:border-gold-light hover:text-gold-light transition-colors duration-300 inline-block">
