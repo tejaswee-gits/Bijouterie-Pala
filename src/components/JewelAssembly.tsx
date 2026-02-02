@@ -88,9 +88,21 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
 
                 // Calculate aspect ratio to fit image in canvas
                 const canvas = canvasRef.current!;
+                const isMobile = window.innerWidth < 768;
+
                 const hRatio = canvas.width / img.width;
                 const vRatio = canvas.height / img.height;
-                const ratio = Math.min(hRatio, vRatio);
+
+                // On mobile, we want a more "immersive" zoom (closer to cover, but properly centered)
+                // On desktop, we want "contain" to see the full object.
+                let ratio = Math.min(hRatio, vRatio);
+
+                if (isMobile) {
+                    // Zoom in significantly on mobile to emphasize the jewel details ("futuristic/macro" feel)
+                    // limit the zoom so it doesn't break boundaries too much, but feels "big"
+                    ratio = Math.max(hRatio, vRatio) * 0.9;
+                }
+
                 const centerShift_x = (canvas.width - img.width * ratio) / 2;
                 const centerShift_y = (canvas.height - img.height * ratio) / 2;
 
@@ -183,9 +195,9 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
                     className="w-full h-full object-contain pointer-events-none"
                 />
 
-                {/* Watermark Mask - Bottom Right Corner - Extended */}
-                <div className="absolute bottom-0 right-0 w-80 h-32 bg-gradient-to-tl from-obsidian via-obsidian/95 to-transparent pointer-events-none z-10" />
-                <div className="absolute bottom-0 right-0 w-56 h-20 bg-obsidian pointer-events-none z-10" />
+                {/* Watermark Mask - Bottom Right Corner - Extended - Responsive */}
+                <div className="absolute bottom-0 right-0 w-full md:w-80 h-32 bg-gradient-to-t md:bg-gradient-to-tl from-obsidian via-obsidian/95 to-transparent pointer-events-none z-10" />
+                <div className="absolute bottom-0 right-0 w-full md:w-56 h-20 bg-obsidian pointer-events-none z-10" />
 
                 {/* Narrative Overlays */}
 

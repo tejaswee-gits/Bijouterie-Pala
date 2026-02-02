@@ -58,7 +58,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-[#0a0a0a] border border-white/10 shadow-2xl z-50 overflow-hidden rounded-sm"
+                        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-lg bg-[#0a0a0a] border border-white/10 shadow-2xl z-50 overflow-hidden rounded-sm"
                     >
                         {/* Header */}
                         <div className="flex justify-between items-center p-6 border-b border-white/5 bg-[#050505]">
@@ -77,13 +77,13 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         </div>
 
                         {/* Body */}
-                        <div className="p-8 max-h-[70vh] overflow-y-auto">
+                        <div className="p-6 md:p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
                             {step === 1 && (
                                 <div className="space-y-8">
                                     {/* Date Selection */}
                                     <div>
                                         <label className="block text-xs uppercase tracking-widest text-gray-500 mb-4">{t.booking.date_label}</label>
-                                        <div className="grid grid-cols-5 gap-2">
+                                        <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                                             {dates.map((date) => {
                                                 const isSelected = selectedDate === date.toDateString();
                                                 return (
@@ -91,8 +91,8 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                                         key={date.toString()}
                                                         onClick={() => setSelectedDate(date.toDateString())}
                                                         className={`flex flex-col items-center justify-center p-2 rounded-sm border transition-all duration-300 ${isSelected
-                                                                ? "border-gold bg-gold/10 text-white"
-                                                                : "border-white/5 text-gray-400 hover:border-white/20 hover:bg-white/5"
+                                                            ? "border-gold bg-gold/10 text-white"
+                                                            : "border-white/5 text-gray-400 hover:border-white/20 hover:bg-white/5"
                                                             }`}
                                                     >
                                                         <span className="text-xs uppercase opacity-70 mb-1">
@@ -110,7 +110,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                     {/* Time Selection */}
                                     <div className={`transition-opacity duration-500 ${selectedDate ? "opacity-100" : "opacity-30 pointer-events-none"}`}>
                                         <label className="block text-xs uppercase tracking-widest text-gray-500 mb-4">{t.booking.time_label}</label>
-                                        <div className="grid grid-cols-3 gap-3">
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                             {timeSlots.map((time) => {
                                                 const isSelected = selectedTime === time;
                                                 return (
@@ -118,8 +118,8 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                                         key={time}
                                                         onClick={() => setSelectedTime(time)}
                                                         className={`py-2 px-4 rounded-sm border text-sm font-sans transition-all duration-300 ${isSelected
-                                                                ? "border-gold bg-gold/10 text-white"
-                                                                : "border-white/5 text-gray-400 hover:border-white/20 hover:bg-white/5"
+                                                            ? "border-gold bg-gold/10 text-white"
+                                                            : "border-white/5 text-gray-400 hover:border-white/20 hover:bg-white/5"
                                                             }`}
                                                     >
                                                         {time}
