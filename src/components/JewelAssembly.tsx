@@ -98,9 +98,9 @@ export default function JewelAssembly({ onOpenBooking }: JewelAssemblyProps) {
                 let ratio = Math.min(hRatio, vRatio);
 
                 if (isMobile) {
-                    // Zoom in significantly on mobile to emphasize the jewel details ("futuristic/macro" feel)
-                    // limit the zoom so it doesn't break boundaries too much, but feels "big"
-                    ratio = Math.max(hRatio, vRatio) * 0.9;
+                    // Adjusted zoom: Use 'contain' logic (Math.min) so the whole object is visible,
+                    // but add a slight 15% zoom to make it feel "big" and immersive without aggressive clipping.
+                    ratio = Math.min(hRatio, vRatio) * 1.15;
                 }
 
                 const centerShift_x = (canvas.width - img.width * ratio) / 2;
