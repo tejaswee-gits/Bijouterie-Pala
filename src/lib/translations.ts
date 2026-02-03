@@ -98,7 +98,24 @@ export const translations = {
                 email: "Email",
                 phone: "Téléphone",
                 message: "Message (Optionnel)"
-            }
+            },
+            subtitle: "Prendre Rendez-vous",
+            title_main: "Créez votre moment.",
+            desc_main: "Sélectionnez une date et une heure pour rencontrer nos artisans dans l'une de nos boutiques de Montpellier.",
+            details_title: "Détails de la visite",
+            label_name: "Nom Complet",
+            placeholder_name: "Jean Dupont",
+            label_email: "Email",
+            placeholder_email: "jean@exemple.com",
+            label_service: "Type de Service",
+            service_options: {
+                creation: "Création Sur-Mesure",
+                repair: "Réparation & Entretien",
+                wedding: "Alliances & Fiançailles"
+            },
+            label_time: "Horaires Disponibles",
+            btn_confirm: "Confirmer le RDV",
+            disclaimer: "* Votre rendez-vous sera confirmé par email dans les 24 heures."
         },
         reviews: {
             label: "Témoignages",
