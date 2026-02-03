@@ -359,9 +359,7 @@ function MainContent() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                <div className="text-white text-4xl">📸</div>
-              </div>
+
             </div>
           </motion.div>
 
