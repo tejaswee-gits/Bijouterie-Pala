@@ -43,14 +43,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     return (
         <AnimatePresence>
             {isOpen && (
-                <>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4 cursor-pointer"
+                        className="absolute inset-0 bg-black/95 backdrop-blur-md"
                     />
 
                     {/* Modal Container */}
@@ -58,7 +58,8 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-5xl h-auto max-h-[90vh] bg-[#0c0c0c] border border-white/5 shadow-2xl z-50 overflow-hidden rounded-sm flex flex-col md:flex-row"
+                        className="relative w-full max-w-5xl h-auto max-h-[90vh] bg-[#0c0c0c] border border-white/5 shadow-2xl overflow-hidden rounded-sm flex flex-col md:flex-row z-10"
+                        onClick={(e) => e.stopPropagation()}
                     >
                         {/* Success Overlay */}
                         {isSuccess && (
@@ -198,7 +199,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                             </form>
                         </div>
                     </motion.div>
-                </>
+                </div>
             )}
         </AnimatePresence>
     );
